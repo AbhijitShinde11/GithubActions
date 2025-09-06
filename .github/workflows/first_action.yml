@@ -1,0 +1,12 @@
+name: First Workflow # just a name
+on : workflow_dispatch # when should it be trigger , workflow_dispatch for manual start 
+jobs: # work to be done
+  fistJob:
+    runs-on: ubuntu-latest # where should it be, execution Environment
+    steps: # what needs to be done
+      - name: Print greeting
+        run: echo "Hello World!"
+      - name: Print goodbye
+        run: echo "GoodBye World!"
+        
+      
