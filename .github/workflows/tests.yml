@@ -21,7 +21,6 @@ jobs:
     deploy:
         runs-on: ubuntu-latest
         needs: test # this job depends on the successful completion of the 'test' job
-        if: github.ref == 'refs/heads/main' # only run this job if the push was to the main branch
         steps:
             - name: Get code
               uses: actions/checkout@v5 # use the checkout action to get the code version 5
