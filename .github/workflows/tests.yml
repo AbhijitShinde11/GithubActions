@@ -14,10 +14,6 @@ jobs:
         steps:
             - name: Get code
               uses: actions/checkout@v5 # use the checkout action to get the code version 5
-            - name: Install NodeJS
-              uses: actions/setup-node@v3 # use the setup-node action to install NodeJS version 3
-              with:
-                  node-version: '18' # specify the NodeJS version to install
             - name: Install dependencies
               run: npm ci # run npm install to install project dependencies
             - name: Run linter
@@ -27,10 +23,6 @@ jobs:
         steps:
             - name: Get code
               uses: actions/checkout@v5 # use the checkout action to get the code version 5
-            - name: Install NodeJS
-              uses: actions/setup-node@v3 # use the setup-node action to install NodeJS version 3
-              with:
-                  node-version: '18' # specify the NodeJS version to install
             - name: Install dependencies
               run: npm ci # run npm install to install project dependencies
             - name: Run tests
@@ -41,14 +33,15 @@ jobs:
         steps:
             - name: Get code
               uses: actions/checkout@v5 # use the checkout action to get the code version 5
-            - name: Install NodeJS
-              uses: actions/setup-node@v3 # use the setup-node action to install NodeJS version 3
-              with:
-                  node-version: '18' # specify the NodeJS version to install
             - name: Install dependencies
               run: npm ci # run npm install to install project dependencies
             - name: Build application
               run: npm run build # run the build script using npm
+            - name: upload artifact
+              uses: actions/upload-artifact@v3 # use the upload-artifact action to upload build artifacts
+              with:
+                  name: build-artifact # name of the artifact
+                  path: dist/ # path to the build output directory
             - name: Deploy application
               run: echo "Deploying application..." # placeholder for deployment command
               
