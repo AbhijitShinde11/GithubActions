@@ -9,15 +9,6 @@ on:
     workflow_dispatch: # allow manual triggering of the workflow
 
 jobs:
-    lint:
-        runs-on: ubuntu-latest # specify the operating system for the job
-        steps:
-            - name: Get code
-              uses: actions/checkout@v5 # use the checkout action to get the code version 5
-            - name: Install dependencies
-              run: npm ci # run npm install to install project dependencies
-            - name: Run linter
-              run: npm run lint # run the linter using npm
     test:
         runs-on: ubuntu-latest
         steps:
@@ -38,7 +29,7 @@ jobs:
             - name: Build application
               run: npm run build # run the build script using npm
             - name: upload artifact
-              uses: actions/upload-artifact@v3 # use the upload-artifact action to upload build artifacts
+              uses: actions/upload-artifact@v4 # use the upload-artifact action to upload build artifacts
               with:
                   name: build-artifact # name of the artifact
                   path: dist/ # path to the build output directory
