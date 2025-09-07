@@ -3,7 +3,7 @@ import globals from "globals";
 import pluginReact from "eslint-plugin-react";
 import { defineConfig } from "eslint/config";
 
-//Do not include in Workflow run
+//Do not include in Workflow run. 
 export default defineConfig([
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],

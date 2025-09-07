@@ -1,2 +1,2 @@
 Github Actions Tutorial
-Updated the Readme to test Workflow!!
+Updated the Readme to test paths-ignore
