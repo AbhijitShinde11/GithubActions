@@ -1,10 +1,23 @@
-name: Test Project
+name: Deploy App
 on: 
     push: # run this workflow on push to main branch
         branches:
         - main # specify the branch to monitor
     workflow_dispatch: # allow manual triggering of the workflow
 jobs:
+    lint:
+        runs-on: ubuntu-latest # specify the operating system for the job
+        steps:
+            - name: Get code
+              uses: actions/checkout@v5 # use the checkout action to get the code version 5
+            - name: Install NodeJS
+              uses: actions/setup-node@v3 # use the setup-node action to install NodeJS version 3
+              with:
+                  node-version: '18' # specify the NodeJS version to install
+            - name: Install dependencies
+              run: npm ci # run npm install to install project dependencies
+            - name: Run linter
+              run: npm run lint # run the linter using npm
     test:
         runs-on: ubuntu-latest
         steps:

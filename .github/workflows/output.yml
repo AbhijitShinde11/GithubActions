@@ -1,5 +1,8 @@
 name: Output Information
-on: workflow_dispatch
+on: 
+    workflow_dispatch: # allow manual triggering of the workflow
+    issues: # trigger the workflow on issue events
+        types: [opened] # specify the issue event type to monitor
 jobs:
     output:
         runs-on: ubuntu-latest
