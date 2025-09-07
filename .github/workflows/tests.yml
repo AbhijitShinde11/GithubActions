@@ -1,9 +1,12 @@
 name: Deploy App
 on: 
     push: # run this workflow on push to main branch
-        branches:
+      branches:
         - main # specify the branch to monitor
+      paths-ignore:
+        - '**.md' # ignore markdown files
     workflow_dispatch: # allow manual triggering of the workflow
+
 jobs:
     lint:
         runs-on: ubuntu-latest # specify the operating system for the job
