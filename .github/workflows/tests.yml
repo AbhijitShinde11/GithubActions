@@ -5,6 +5,7 @@ on:
         - main # specify the branch to monitor
       paths-ignore:
         - '**.md' # ignore markdown files
+        - '.config/**' # ignore config files
     workflow_dispatch: # allow manual triggering of the workflow
 
 jobs:
