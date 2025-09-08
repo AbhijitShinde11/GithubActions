@@ -9,7 +9,7 @@ on:
     workflow_dispatch: # allow manual triggering of the workflow
 
 jobs:
-    test:
+    build:
         runs-on: ubuntu-latest
         steps:
             - name: Get code
@@ -18,14 +18,6 @@ jobs:
               run: npm ci # run npm install to install project dependencies
             - name: Run tests
               run: npm test # run the tests using npm
-    deploy:
-        runs-on: ubuntu-latest
-        needs: test # this job depends on the successful completion of the 'test' job
-        steps:
-            - name: Get code
-              uses: actions/checkout@v5 # use the checkout action to get the code version 5
-            - name: Install dependencies
-              run: npm ci # run npm install to install project dependencies
             - name: Build application
               run: npm run build # run the build script using npm
             - name: upload artifact
@@ -33,6 +25,14 @@ jobs:
               with:
                   name: build-artifact # name of the artifact
                   path: dist/ # path to the build output directory
+    deploy:
+        runs-on: ubuntu-latest
+        needs: build # this job depends on the successful completion of the 'build' job
+        steps:
+            - name: Download artifact
+              uses: actions/download-artifact@v4 # use the download-artifact action to download build artifacts
+              with:
+                  name: build-artifact # name of the artifact to download
             - name: Deploy application
               run: echo "Deploying application..." # placeholder for deployment command
               
