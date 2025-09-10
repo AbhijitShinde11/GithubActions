@@ -39,6 +39,8 @@ jobs:
         runs-on: ubuntu-latest
         needs: build # this job depends on the successful completion of the 'build' job
         steps:
+            - name: Get code
+              uses: actions/checkout@v5
             - name: Get Repo_Name
               run: echo '${{needs.build.outputs.repoName}}' # output the repository name from the build job
             - name: Cache dependencies
