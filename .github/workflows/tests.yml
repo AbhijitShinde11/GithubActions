@@ -16,6 +16,11 @@ jobs:
         steps:
             - name: Get code
               uses: actions/checkout@v5 # use the checkout action to get the code version 5
+            - name: Cache dependencies
+              uses: actions/cache@v4
+              with:
+                  path: ~/.npm
+                  key: deps-${{hashFiles('**/package-lock.json')}}
             - name: Install dependencies
               run: npm ci # run npm install to install project dependencies
             - name: Run tests
@@ -36,6 +41,13 @@ jobs:
         steps:
             - name: Get Repo_Name
               run: echo '${{needs.build.outputs.repoName}}' # output the repository name from the build job
+            - name: Cache dependencies
+              uses: actions/cache@v4
+              with:
+                  path: ~/.npm
+                  key: deps-${{hashFiles('**/package-lock.json')}}
+            - name: Install dependencies
+              run: npm ci 
             - name: Download artifact
               uses: actions/download-artifact@v4 # use the download-artifact action to download build artifacts
               with:
