@@ -40,6 +40,8 @@ jobs:
         env:
           NODE_ENV: production # set the NODE_ENV environment variable to 'production'
         steps:
+            - name: Access Secrets
+              run: echo 'Accessing Repo Key ${{secrets.REPO_KEY}}' # access a secret named API_KEY
             - name: Get code
               uses: actions/checkout@v5
             - name: Get Repo_Name
