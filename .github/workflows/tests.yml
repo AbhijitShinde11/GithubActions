@@ -7,7 +7,6 @@ on:
         - '**.md' # ignore markdown files
         - '**/*.config.*' # ignore config files
     workflow_dispatch: # allow manual triggering of the workflow
-
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -38,6 +37,8 @@ jobs:
     deploy:
         runs-on: ubuntu-latest
         needs: build # this job depends on the successful completion of the 'build' job
+        env:
+          NODE_ENV: production # set the NODE_ENV environment variable to 'production'
         steps:
             - name: Get code
               uses: actions/checkout@v5
@@ -55,5 +56,5 @@ jobs:
               with:
                   name: build-artifact # name of the artifact to download
             - name: Deploy application
-              run: echo "Deploying application..." # placeholder for deployment command
+              run: echo "Deploying application on $NODE_ENV" # placeholder for deployment command
               
